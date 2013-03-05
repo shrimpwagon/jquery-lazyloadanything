@@ -6,13 +6,13 @@ Trigger events when elements come into view - binds events to the vertical scrol
 Basic Syntax
 ------------
 
-    $('img').lazyloadanything('{
+    $('img').lazyloadanything({
         'onLoad': function(e, LLobj) {
             var $img = LLobj.$element;
             var src = $img.attr('data-src');
             $img.attr('src', src);
         }
-    }');
+    });
     
 This example is showing how the image source url is stored in the `data-src` attribute and loads into the `src` attribute when the user scrolls into view of the image. Of course, the selector will most likely be more specific.
 
