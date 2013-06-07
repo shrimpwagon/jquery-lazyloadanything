@@ -63,7 +63,7 @@
 						llelem_top = llelements[i].getTop();
 						llelem_bottom = llelements[i].getBottom();
                                                 
-						if(!llelements[i].$element.is(':visible'))
+						if(llelements[i].$element.is(':visible'))
 						{
 							if(
 
