@@ -58,25 +58,28 @@
 				
 					// Cycle through llelements and check if they are within viewpane
 					for(i = 0; i < llelements.length; i++) {
-					
+                                                
 						// Get top and bottom of llelem
 						llelem_top = llelements[i].getTop();
 						llelem_bottom = llelements[i].getBottom();
-				
-						if(
-					
-						// Top edge						
-						(llelem_top >= windowScrollTop && llelem_top <= windowScrollBottom) ||
-					
-						// Bottom edge
-						(llelem_bottom >= windowScrollTop && llelem_bottom <= windowScrollBottom) ||
-					
-						// In full view
-						(llelem_top <= windowScrollTop && llelem_bottom >= windowScrollBottom)) {
-						
-							// Grab index of llelements that will be loaded
-							if(settings.repeatLoad || !llelements[i].loaded) load_elements.push(i);
-						
+                                                
+						if(llelements[i].$element.is(':visible'))
+						{
+							if(
+
+							// Top edge						
+							(llelem_top >= windowScrollTop && llelem_top <= windowScrollBottom) ||
+
+							// Bottom edge
+							(llelem_bottom >= windowScrollTop && llelem_bottom <= windowScrollBottom) ||
+
+							// In full view
+							(llelem_top <= windowScrollTop && llelem_bottom >= windowScrollBottom)) {
+
+									// Grab index of llelements that will be loaded
+									if(settings.repeatLoad || !llelements[i].loaded) load_elements.push(i);
+
+							}
 						}
 					}
 			
