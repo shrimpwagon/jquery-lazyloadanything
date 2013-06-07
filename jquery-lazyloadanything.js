@@ -22,7 +22,6 @@
 				'timeout': 1000,
 				'includeMargin': false,
 				'repeatLoad': false,
-                'hiddenClass' : '',
 				'onLoadingStart': function(e, llelements, indexes) {
 					return true;
 				},
@@ -64,7 +63,7 @@
 						llelem_top = llelements[i].getTop();
 						llelem_bottom = llelements[i].getBottom();
                                                 
-						if(!llelements[i].$element.parent().parent().hasClass(settings.hiddenClass))
+						if(!llelements[i].$element.is(':visible'))
 						{
 							if(
 

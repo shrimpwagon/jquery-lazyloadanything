@@ -72,12 +72,6 @@ Default: `false`
 
 Boolean setting which allows the [onLoad](#onload) event to always trigger regardless of the [LLobj](#llobj) objects' [loaded](#llobjloaded) property. In other words, it will not just fire once but each time the element comes into view.
 
-### `hiddenClass`
-
-Default: `""`
-
-String setting which allow the plugin to skip loading elements that are hidden from the page. For example When fitlering with isotope, `isotope-hidden` elements should not be loaded as they are hidden from the page.
-
 ### `onLoadingStart`
 
 Default: `function(e, LLobjs, indexes) { return true }`
