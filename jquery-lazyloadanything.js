@@ -5,9 +5,9 @@
 */
 (function( $ ) {
 
-	// Cache jQuery window
-	var $window = $(window);
-	
+	// Element to listen to scroll event
+	var $listenTo;
+
 	// Force load flag
 	var force_load_flag = false;
 
@@ -21,7 +21,9 @@
 				'cache': false,
 				'timeout': 1000,
 				'includeMargin': false,
+				'viewportMargin': 0,
 				'repeatLoad': false,
+				'listenTo': window,
 				'onLoadingStart': function(e, llelements, indexes) {
 					return true;
 				},
@@ -31,15 +33,17 @@
 				'onLoadingComplete': function(e, llelements, indexes) {
 					return true;
 				}
+				
 			}
 
 			var settings = $.extend({}, defaults, options);
+			$listenTo = $(settings.listenTo);
 			var timeout = 0;
 			var llelements = [];
 			var $selector = this;
 
 			// Scroll listener
-			$window.bind('scroll.lla', function(e) {
+			$listenTo.bind('scroll.lla', function(e) {
 		
 				// Check for manually/auto load
 				if(!force_load_flag && !settings.auto) return false;
@@ -50,31 +54,42 @@
 		
 				// Set the timeout for onLoad
 				timeout = setTimeout(function() {
-			
+				
+					/*
+					x1, y1 o----------------------o x2, y1
+						   |                      |
+						   |                      |
+						   |                      |
+						   |                      |
+						   |                      |
+						   |                      |
+						   |                      |
+						   |                      |
+					x1, y2 o----------------------o x2, y2
+					*/
+					
+					var viewport_left = $listenTo.scrollLeft();
+					var viewport_top = $listenTo.scrollTop();
+					var viewport_x1 = viewport_left - settings.viewportMargin;
+					var viewport_x2 = viewport_left + $listenTo.innerWidth() + settings.viewportMargin;
+					var viewport_y1 = viewport_top - settings.viewportMargin;
+					var viewport_y2 = viewport_top + $listenTo.innerHeight() + settings.viewportMargin;
+					
 					var load_elements = [];
-					var windowScrollTop = $(window).scrollTop();
-					var windowScrollBottom = windowScrollTop + $(window).height();
 					var i, llelem_top, llelem_bottom;
 				
 					// Cycle through llelements and check if they are within viewpane
 					for(i = 0; i < llelements.length; i++) {
                                                 
 						// Get top and bottom of llelem
-						llelem_top = llelements[i].getTop();
-						llelem_bottom = llelements[i].getBottom();
+						llelem_x1 = llelements[i].getLeft();
+						llelem_x2 = llelements[i].getRight();
+						llelem_y1 = llelements[i].getTop();
+						llelem_y2 = llelements[i].getBottom();
                                                 
 						if(llelements[i].$element.is(':visible'))
 						{
-							if(
-
-							// Top edge						
-							(llelem_top >= windowScrollTop && llelem_top <= windowScrollBottom) ||
-
-							// Bottom edge
-							(llelem_bottom >= windowScrollTop && llelem_bottom <= windowScrollBottom) ||
-
-							// In full view
-							(llelem_top <= windowScrollTop && llelem_bottom >= windowScrollBottom)) {
+							if((viewport_x1 < llelem_x2) && (viewport_x2 > llelem_x1) && (viewport_y1 < llelem_y2) && (viewport_y2 > llelem_y1)) {
 
 									// Grab index of llelements that will be loaded
 									if(settings.repeatLoad || !llelements[i].loaded) load_elements.push(i);
@@ -115,6 +130,8 @@
 				this.$element = $element;
 				this.top = undefined;
 				this.bottom = undefined;
+				this.left = undefined;
+				this.right = undefined;
 				
 				this.getTop = function() {
 					if(self.top) return self.top;
@@ -129,10 +146,25 @@
 					return top + self.$element.outerHeight(settings.includeMargin);
 				}
 				
+				this.getLeft = function() {
+					if(self.left) return self.left;
+				
+					return self.$element.offset().left;
+				}
+				
+				this.getRight = function() {
+					if(self.right) return self.right;
+				
+					var left = (self.left) ? self.left : this.getLeft();
+					return left + self.$element.outerWidth(settings.includeMargin);
+				}
+				
 				// Cache the top and bottom of set
 				if(settings.cache) {
 					this.top = this.getTop();
 					this.bottom = this.getBottom();
+					this.left = this.getLeft();
+					this.right = this.getRight();
 				}
 			
 			}
@@ -149,12 +181,12 @@
 		},
 	
 		'destroy': function() {
-			$window.unbind('scroll.lla');
+			$listenTo.unbind('scroll.lla');
 		},
 		
 		'load': function() {
 			force_load_flag = true;
-			$window.trigger('scroll.lla');
+			$listenTo.trigger('scroll.lla');
 		}
 	
 	}
