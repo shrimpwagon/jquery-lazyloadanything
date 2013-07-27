@@ -70,10 +70,12 @@
 					
 					var viewport_left = $listenTo.scrollLeft();
 					var viewport_top = $listenTo.scrollTop();
+					var viewport_width = $listenTo.innerWidth();
+					var viewport_height = $listenTo.innerHeight();
 					var viewport_x1 = viewport_left - settings.viewportMargin;
-					var viewport_x2 = viewport_left + $listenTo.innerWidth() + settings.viewportMargin;
+					var viewport_x2 = viewport_left + viewport_width + settings.viewportMargin;
 					var viewport_y1 = viewport_top - settings.viewportMargin;
-					var viewport_y2 = viewport_top + $listenTo.innerHeight() + settings.viewportMargin;
+					var viewport_y2 = viewport_top + viewport_height + settings.viewportMargin;
 					
 					var load_elements = [];
 					var i, llelem_top, llelem_bottom;
@@ -136,7 +138,7 @@
 				this.getTop = function() {
 					if(self.top) return self.top;
 				
-					return self.$element.offset().top;
+					return self.$element.position().top;
 				}
 				
 				this.getBottom = function() {
@@ -149,7 +151,7 @@
 				this.getLeft = function() {
 					if(self.left) return self.left;
 				
-					return self.$element.offset().left;
+					return self.$element.position().left;
 				}
 				
 				this.getRight = function() {
