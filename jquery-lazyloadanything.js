@@ -84,10 +84,10 @@
 					for(i = 0; i < llelements.length; i++) {
                                                 
 						// Get top and bottom of llelem
-						llelem_x1 = llelements[i].getLeft();
-						llelem_x2 = llelements[i].getRight();
-						llelem_y1 = llelements[i].getTop();
-						llelem_y2 = llelements[i].getBottom();
+						var llelem_x1 = llelements[i].getLeft();
+						var llelem_x2 = llelements[i].getRight();
+						var llelem_y1 = llelements[i].getTop();
+						var llelem_y2 = llelements[i].getBottom();
                                                 
 						if(llelements[i].$element.is(':visible'))
 						{
