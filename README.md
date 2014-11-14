@@ -1,7 +1,7 @@
 jquery-lazyloadanything
 =======================
 
-Trigger events when elements come into view - binds events to the vertical scroll listener. This plugin was designed to go beyond just lazy loading images. It basically triggers events whenever specified elements become visible in the view pane via scrolling up or down. You can dynamically load any kind of content or do any type of jQuery or Javascript executing you wish. The triggering elements are determined by the jQuery selector and are accessible during event firing. Plugin can be applied to multiple selectors on the same page.
+Trigger events when elements come into view - binds events to the vertical and horizontal scroll listener. This plugin was designed to go beyond just lazy loading images. It basically triggers events whenever specified elements become visible in the view pane via scrolling in either direction. You can dynamically load any kind of content or do any type of jQuery or Javascript executing you wish. The triggering elements are determined by the jQuery selector and are accessible during event firing. Plugin can be applied to multiple selectors on the same page.
 
 Basic Syntax
 ------------
@@ -121,9 +121,9 @@ Will force load any applicable (in-view) elements. This is helpful to dynamicall
 Requirements and Compatability
 ------------
 
-This plugin is tested and developed using jQuery version 1.8.3.
+jQuery >= 1.8
 
-It works in Iceweasel (Firefox) version 18.0.
+Seems to work in all modern browsers.
 
 I haven't taken the time to test multiple browser and jQuery versions but this is a simple plugin and I'm sure will work fine under many different environment arrangements.
 
