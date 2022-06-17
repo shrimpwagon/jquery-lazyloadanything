@@ -3,7 +3,7 @@ jquery-lazyloadanything
 
 Trigger events when elements come into view - binds events to the vertical and horizontal scroll listener. This plugin was designed to go beyond just lazy loading images. It basically triggers events whenever specified elements become visible in the view pane via scrolling in either direction. You can dynamically load any kind of content or do any type of jQuery or Javascript executing you wish. The triggering elements are determined by the jQuery selector and are accessible during event firing. Plugin can be applied to multiple selectors on the same page.
 
-Basic Syntax
+Basic Image Loading Syntax
 ------------
 
     $('img').lazyloadanything({
@@ -11,6 +11,14 @@ Basic Syntax
             var $img = LLobj.$element;
             var src = $img.attr('data-src');
             $img.attr('src', src);
+        }
+    });
+
+Element with Class Loaded in Viewport
+-------------
+    $('.red-bg-onload').lazyloadanything({
+        'onLoad': function(e, LLobj) {
+            LLobj.$element.css('background-color', 'red');
         }
     });
     
