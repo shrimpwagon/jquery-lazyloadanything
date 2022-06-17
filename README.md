@@ -5,6 +5,7 @@ Trigger events when elements come into view - binds events to the vertical and h
 
 Basic Image Loading Syntax
 ------------
+This example is showing how the image source url is stored in the `data-src` attribute and loads into the `src` attribute when the user scrolls into view of the image. Of course, the selector will most likely be more specific.
 
     $('img').lazyloadanything({
         'onLoad': function(e, LLobj) {
@@ -16,13 +17,13 @@ Basic Image Loading Syntax
 
 Element with Class Loaded in Viewport
 -------------
+This example shows how to turn the background of elements red when it is lazy loaded into the viewport.
+
     $('.red-bg-onload').lazyloadanything({
         'onLoad': function(e, LLobj) {
             LLobj.$element.css('background-color', 'red');
         }
     });
-    
-This example is showing how the image source url is stored in the `data-src` attribute and loads into the `src` attribute when the user scrolls into view of the image. Of course, the selector will most likely be more specific.
 
 Each [onLoad](#onload) call passes the [LLobj](#llobj) variable which is a Lazy Load object that contains 4 properties and two methods.
 
